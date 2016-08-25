@@ -1,0 +1,8 @@
+{
+    "graphiteHost": "graphite.eqiad.wmnet",
+    "graphitePort": 8126,
+    "categories": {
+        "kartographer-tracking-category": "kartographer.pages.%WIKI%.hourly",
+        "graph-tracking-category": "graph.pages.%WIKI%.hourly"
+    }
+}
