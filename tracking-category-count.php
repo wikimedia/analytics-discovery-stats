@@ -22,8 +22,11 @@ function recordToGraphite( $wiki, $metric, $count ) {
     }
 
     $key = str_replace( '%WIKI%', $wiki, $config->categories[$metric] );
+    $packet = "$metric $count `date +%s`";
+    $nc = "nc -q0 {$config->graphiteHost} {$config->graphitePort}";
+    $command = "echo \"$packet\" | $nc";
 
-    exec( "echo \"$metric $count `date +%s`\" | nc -q0 {$config->graphiteHost} {$config->graphitePort}" );
+    exec( $command );
 }
 
 $matrix = new SiteMatrix;
