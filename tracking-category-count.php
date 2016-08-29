@@ -2,10 +2,6 @@
 
 namespace DiscoveryStats;
 
-use Liuggio\StatsdClient\StatsdClient;
-use Liuggio\StatsdClient\Sender\SocketSender;
-use Liuggio\StatsdClient\Service\StatsdService;
-
 require_once( 'vendor/autoload.php' );
 
 $wikiBlacklist = [
