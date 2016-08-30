@@ -15,17 +15,20 @@ $config->categories = (array)$config->categories;
 $categoryKeys = array_keys( $config->categories );
 
 function recordToGraphite( $wiki, $metric, $count ) {
-    global $config;
+    global $config, $debug;
 
     if ( !$config->graphiteHost || !$config->graphitePort ) {
         return;
     }
 
     $key = str_replace( '%WIKI%', $wiki, $config->categories[$metric] );
-    $packet = "$metric $count `date +%s`";
+    $packet = "$key $count `date +%s`";
     $nc = "nc -q0 {$config->graphiteHost} {$config->graphitePort}";
     $command = "echo \"$packet\" | $nc";
 
+    if ( $debug ) {
+        echo "$command\n";
+    }
     exec( $command );
 }
 
