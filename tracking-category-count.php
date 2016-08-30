@@ -2,10 +2,6 @@
 
 namespace DiscoveryStats;
 
-use Liuggio\StatsdClient\StatsdClient;
-use Liuggio\StatsdClient\Sender\SocketSender;
-use Liuggio\StatsdClient\Service\StatsdService;
-
 require_once( 'vendor/autoload.php' );
 
 $wikiBlacklist = [
@@ -19,15 +15,21 @@ $config->categories = (array)$config->categories;
 $categoryKeys = array_keys( $config->categories );
 
 function recordToGraphite( $wiki, $metric, $count ) {
-    global $config;
+    global $config, $debug;
 
     if ( !$config->graphiteHost || !$config->graphitePort ) {
         return;
     }
 
     $key = str_replace( '%WIKI%', $wiki, $config->categories[$metric] );
+    $packet = "$key $count `date +%s`";
+    $nc = "nc -q0 {$config->graphiteHost} {$config->graphitePort}";
+    $command = "echo \"$packet\" | $nc";
 
-    exec( "echo \"$metric $count `date +%s`\" | nc -q0 {$config->graphiteHost} {$config->graphitePort}" );
+    if ( $debug ) {
+        echo "$command\n";
+    }
+    exec( $command );
 }
 
 $matrix = new SiteMatrix;
