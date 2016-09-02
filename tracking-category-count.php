@@ -10,7 +10,7 @@ $wikiBlacklist = [
 
 $debug = in_array( '--debug', $argv );
 
-$config = json_decode( file_get_contents( 'config.json' ) );
+$config = json_decode( file_get_contents( __DIR__ . '/config.json' ) );
 $config->categories = (array)$config->categories;
 $categoryKeys = array_keys( $config->categories );
 
