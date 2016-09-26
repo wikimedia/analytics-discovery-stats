@@ -16,11 +16,15 @@ $categoryKeys = array_keys( $config->categories );
 
 function recordToGraphite( $wiki, $metric, $count ) {
     global $config, $debug;
-    static $timestamp = time();
+    static $timestamp;
 
     if ( !$config->graphiteHost || !$config->graphitePort ) {
         return;
     }
+    if ( !$timestamp ) {
+        $timestamp = time();
+    }
+
 
     $key = str_replace( '%WIKI%', $wiki, $config->categories[$metric] );
     $packet = "$key $count $timestamp";
