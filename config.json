@@ -4,5 +4,11 @@
     "categories": {
         "kartographer-tracking-category": "kartographer.pages.%WIKI%.hourly",
         "graph-tracking-category": "graph.pages.%WIKI%.hourly"
+    },
+    "geoCoordinates": {
+        "contentNamespaces": {
+            "default": [ 0 ],
+            "commonswiki": [ 6 ]
+        }
     }
 }
