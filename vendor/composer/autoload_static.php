@@ -8,6 +8,8 @@ class ComposerStaticInit9bbb32a7410580a39adf488506a85281
 {
     public static $classMap = array (
         'DiscoveryStats\\Api' => __DIR__ . '/../..' . '/src/Api.php',
+        'DiscoveryStats\\Graphite' => __DIR__ . '/../..' . '/src/Graphite.php',
+        'DiscoveryStats\\Mysql' => __DIR__ . '/../..' . '/src/Mysql.php',
         'DiscoveryStats\\NormalSite' => __DIR__ . '/../..' . '/src/NormalSite.php',
         'DiscoveryStats\\Site' => __DIR__ . '/../..' . '/src/Site.php',
         'DiscoveryStats\\SiteMatrix' => __DIR__ . '/../..' . '/src/SiteMatrix.php',
