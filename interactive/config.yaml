@@ -1,0 +1,33 @@
+databases:
+    el:
+        host: "analytics-store.eqiad.wmnet"
+        port: 3306
+        creds_file: /a/.my.cnf.research
+        db: log
+    el-dev:
+        host: localhost
+        port: 3307
+        creds_file: ~/.my.cnf.research
+        db: log
+
+graphite:
+    host: graphite.eqiad.wmnet
+    port: 2003
+    lookups:
+        wiki: sitematrix.yaml
+
+defaults:
+    db: el
+
+reports:
+
+    events:
+        granularity: days
+        funnel: true
+        starts: 2016-11-04
+        explode_by:
+            wiki: wikis.txt
+        graphite:
+            path: "{_metric}.{action}.{feature}.{wiki}"
+            metrics:
+                "daily.kartographer.events": events
