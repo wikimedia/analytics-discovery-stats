@@ -11,7 +11,7 @@ $wikiBlacklist = [
 ];
 
 $matrix = new SiteMatrix();
-$db = Mysql::connect( '/etc/mysql/conf.d/analytics-research-client.cnf',
+$db = Mysql::connect( '/etc/mysql/conf.d/discovery-stats-client.cnf',
     'analytics-store.eqiad.wmnet'
 );
 $graphite = new Graphite( $config );
