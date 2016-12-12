@@ -3,16 +3,17 @@ SELECT
         event_action AS action,
         event_feature AS feature,
         SUM(event_sampling) AS events
-    FROM Kartographer_16010805
+    FROM Kartographer_16010805, metawiki.sites
     WHERE
-        ('{wiki}' = 'all' OR wiki = '{wiki}')
+        wiki = site_global_key
+        AND (
+            '{family}' = 'all'
+            -- Non-special wikis
+            OR site_group = '{family}'
+            -- site_group for 'metawiki' is 'meta', etc
+            OR ( '{family}' = 'special' AND INSTR(wiki, site_group) = 0 )
+        )
         AND timestamp >= '{from_timestamp}'
         AND timestamp < '{to_timestamp}'
-        AND event_action IN (
-            'view',
-            'open',
-            'close',
-            'hashopen'
-        )
     GROUP BY event_action, event_feature
 ;

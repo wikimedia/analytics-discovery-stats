@@ -1,0 +1,10 @@
+wikipedia
+wikibooks
+wikidata
+wikinews
+wikiquote
+wikisource
+wikiversity
+wikivoyage
+wiktionary
+special
