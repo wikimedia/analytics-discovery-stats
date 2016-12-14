@@ -9,12 +9,15 @@ databases:
         port: 3307
         creds_file: ~/.my.cnf.research
         db: log
+    commons:
+        host: "analytics-store.eqiad.wmnet"
+        port: 3306
+        creds_file: /a/.my.cnf.research
+        db: commonswiki
 
 graphite:
     host: graphite.eqiad.wmnet
     port: 2003
-    #lookups:
-    #    wiki: sitematrix.yaml
 
 defaults:
     db: el
@@ -40,3 +43,15 @@ reports:
             path: "{_metric}.{action}.{feature}"
             metrics:
                 "daily.kartographer.events-all": events
+
+    tabular-repo:
+        granularity: days
+        funnel: true
+        starts: 2016-12-13
+        db: commons
+        explode_by:
+            type: tabtypes.txt
+        graphite:
+            path: "{_metric}.{type}"
+            metrics:
+                "daily.structured-data.repo.pagecount": num
