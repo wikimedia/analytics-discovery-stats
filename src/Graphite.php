@@ -16,8 +16,11 @@ class Graphite {
         $this->timestamp = time();
     }
 
-    public function record( $metric, $value ) {
-        $packet = "{$metric} {$value} {$this->timestamp}";
+    public function record( $metric, $value, $timestamp = null ) {
+        if ( $timestamp === null ) {
+            $timestamp = $this->timestamp;
+        }
+        $packet = "{$metric} {$value} {$timestamp}";
         $nc = "nc -q0 {$this->host} {$this->port}";
         $command = "echo \"$packet\" | $nc";
 
